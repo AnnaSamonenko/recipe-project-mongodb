@@ -1,6 +1,7 @@
 package com.samonenko.recipeproject.domain;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigDecimal;
 
@@ -18,6 +19,7 @@ public class Ingredient {
 
     private Recipe recipe;
 
+    @DBRef
     private UnitOfMeasure unitOfMeasure;
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
@@ -25,5 +27,11 @@ public class Ingredient {
         this.description = description;
         this.unitOfMeasure = uom;
         this.recipe = recipe;
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
+        this.amount = amount;
+        this.description = description;
+        this.unitOfMeasure = uom;
     }
 }
