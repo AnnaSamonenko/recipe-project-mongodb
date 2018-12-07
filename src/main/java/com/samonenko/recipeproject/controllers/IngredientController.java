@@ -26,13 +26,13 @@ public class IngredientController {
     }
 
     @GetMapping("/recipe/{id}/ingredients")
-    public String listOfIngredients(@PathVariable Long id, Model model) {
+    public String listOfIngredients(@PathVariable String id, Model model) {
         model.addAttribute("recipe", recipeService.findRecipeById(id));
         return "/recipe/ingredient/list";
     }
 
     @GetMapping("/recipe/{recipe_id}/ingredient/{ingr_id}/show")
-    public String showIngredient(@PathVariable("recipe_id") Long recipeId, @PathVariable("ingr_id") Long ingrId, Model model) {
+    public String showIngredient(@PathVariable("recipe_id") String recipeId, @PathVariable("ingr_id") Long ingrId, Model model) {
         model.addAttribute("ingredient", ingredientService.findIngredientByIds(recipeId, ingrId));
         return "recipe/ingredient/show";
     }
@@ -47,7 +47,7 @@ public class IngredientController {
     @GetMapping("recipe/{recipeId}/ingredient/{id}/update")
     public String updateRecipeIngredient(@PathVariable String recipeId,
                                          @PathVariable String id, Model model) {
-        model.addAttribute("ingredient", ingredientService.findIngredientByIds(Long.valueOf(recipeId), Long.valueOf(id)));
+        model.addAttribute("ingredient", ingredientService.findIngredientByIds(recipeId, Long.valueOf(id)));
 
         model.addAttribute("uomList", uomService.listOfUOMs());
         return "recipe/ingredient/ingredient_form";
@@ -56,13 +56,13 @@ public class IngredientController {
     @GetMapping("recipe/{recipeId}/ingredient/{id}/delete")
     public String deleteRecipeIngredient(@PathVariable String recipeId,
                                          @PathVariable String id) {
-        ingredientService.deleteIngredientByIds(Long.valueOf(recipeId), Long.valueOf(id));
+        ingredientService.deleteIngredientByIds(recipeId, Long.valueOf(id));
         return "redirect:/recipe/" + recipeId + "/ingredients";
     }
 
     @GetMapping("recipe/{recipeId}/ingredient/new")
     public String createNewRecipeIngredient(@PathVariable String recipeId, Model model) {
-        RecipeDTO recipe = recipeService.findRecipeById(Long.valueOf(recipeId));
+        RecipeDTO recipe = recipeService.findRecipeById(recipeId);
         IngredientDTO ingredientDTO = new IngredientDTO();
         ingredientDTO.setRecipeId(recipe.getId());
         ingredientDTO.setUom(new UnitOfMeasureDTO());

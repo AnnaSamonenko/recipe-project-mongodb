@@ -37,7 +37,7 @@ public class RecipeServiceImplTest {
         MockitoAnnotations.initMocks(this);
         recipeService = new RecipeServiceImpl(recipeRepository, recipeDtoToRecipe, recipeToRecipeDto);
         recipe = new Recipe();
-        recipe.setId(1L);
+        recipe.setId("1");
     }
 
     @Test
@@ -56,7 +56,7 @@ public class RecipeServiceImplTest {
     @Test
     public void findRecipeByIdTest() {
         RecipeDTO recipeDTO = new RecipeDTO();
-        recipeDTO.setId(1L);
+        recipeDTO.setId("1");
         Mockito.when(recipeRepository.findById(recipe.getId())).thenReturn(Optional.of(recipe));
         Mockito.when(recipeToRecipeDto.convert(recipe)).thenReturn(recipeDTO);
 
@@ -70,10 +70,10 @@ public class RecipeServiceImplTest {
 
     @Test
     public void testDeleteById() {
-        Long idToDelete = 2L;
+        String idToDelete = "2";
 
         recipeService.deleteById(idToDelete);
-        Mockito.verify(recipeRepository, Mockito.times(1)).deleteById(Mockito.anyLong());
+        Mockito.verify(recipeRepository, Mockito.times(1)).deleteById(Mockito.anyString());
     }
 
 }

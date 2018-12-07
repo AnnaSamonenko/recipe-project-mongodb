@@ -9,7 +9,6 @@ import com.samonenko.recipeproject.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -36,16 +35,14 @@ public class RecipeServiceImpl implements RecipeService {
         return recipes;
     }
 
-    @Transactional
-    public RecipeDTO findRecipeById(Long l) {
-        Optional<Recipe> recipe = recipeRepository.findById(l);
+    public RecipeDTO findRecipeById(String id) {
+        Optional<Recipe> recipe = recipeRepository.findById(id);
         if (!recipe.isPresent())
-            throw new NotFoundException("Recipe not found for id" + l);
+            throw new NotFoundException("Recipe not found for id" + id);
         return converterRecipeToRecipeDto.convert(recipe.get());
     }
 
     @Override
-    @Transactional
     public RecipeDTO saveRecipe(RecipeDTO recipeDTO) {
         Recipe recipe = converterRecipeDtoToRecipe.convert(recipeDTO);
         Recipe savedRecipe = recipeRepository.save(recipe);
@@ -53,8 +50,7 @@ public class RecipeServiceImpl implements RecipeService {
         return converterRecipeToRecipeDto.convert(savedRecipe);
     }
 
-    @Transactional
-    public void deleteById(Long id) {
+    public void deleteById(String id) {
         recipeRepository.deleteById(id);
     }
 }

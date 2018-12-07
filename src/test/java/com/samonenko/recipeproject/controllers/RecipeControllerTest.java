@@ -34,9 +34,9 @@ public class RecipeControllerTest {
     @Test
     public void testShowById() throws Exception {
         RecipeDTO recipe = new RecipeDTO();
-        recipe.setId(1L);
+        recipe.setId("1");
 
-        Mockito.when(recipeService.findRecipeById(1L)).thenReturn(recipe);
+        Mockito.when(recipeService.findRecipeById("1")).thenReturn(recipe);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/recipe/" + recipe.getId() + "/show"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -47,9 +47,9 @@ public class RecipeControllerTest {
     @Test
     public void testGetRecipeNotFound() throws Exception {
         Recipe recipe = new Recipe();
-        recipe.setId(1L);
+        recipe.setId("1");
 
-        Mockito.when(recipeService.findRecipeById(Mockito.eq(1L))).thenThrow(NotFoundException.class);
+        Mockito.when(recipeService.findRecipeById(Mockito.eq("1"))).thenThrow(NotFoundException.class);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/recipe/1/show"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
@@ -76,7 +76,7 @@ public class RecipeControllerTest {
     @Test
     public void testGetUpdateRecipe() throws Exception {
         RecipeDTO recipeDTO = new RecipeDTO();
-        recipeDTO.setId(1L);
+        recipeDTO.setId("1");
 
         Mockito.when(recipeService.findRecipeById(recipeDTO.getId())).thenReturn(recipeDTO);
 
@@ -90,7 +90,7 @@ public class RecipeControllerTest {
     @Test
     public void testUpdateAndSaveRecipe() throws Exception {
         RecipeDTO recipeDTO = new RecipeDTO();
-        recipeDTO.setId(1L);
+        recipeDTO.setId("1");
 
         Mockito.when(recipeService.saveRecipe(Mockito.any())).thenReturn(recipeDTO);
 
@@ -103,7 +103,7 @@ public class RecipeControllerTest {
     @Test
     public void testUpdateAndSaveRecipeWithInvalidData() throws Exception {
         RecipeDTO recipeDTO = new RecipeDTO();
-        recipeDTO.setId(1L);
+        recipeDTO.setId("1");
 
         Mockito.when(recipeService.saveRecipe(Mockito.any())).thenReturn(recipeDTO);
 
@@ -119,7 +119,7 @@ public class RecipeControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
                 .andExpect(MockMvcResultMatchers.view().name("redirect:/"));
 
-        Mockito.verify(recipeService, Mockito.times(1)).deleteById(Mockito.anyLong());
+        Mockito.verify(recipeService, Mockito.times(1)).deleteById(Mockito.anyString());
     }
 
 }

@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
-
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -39,11 +37,10 @@ public class RecipeServiceIT {
     public void setUp() {
         recipeService = new RecipeServiceImpl(recipeRepository, recipeDtoToRecipe, recipeToRecipeDto);
         recipe = new Recipe();
-        recipe.setId(1L);
+        recipe.setId("1L");
     }
 
     @Test
-    @Transactional
     public void saveRecipeTest() {
         RecipeDTO recipeDTO = recipeToRecipeDto.convert(recipe);
         RecipeDTO savedRecipe = recipeService.saveRecipe(recipeDTO);

@@ -30,7 +30,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public IngredientDTO findIngredientByIds(Long recipeId, Long ingredientId) {
+    public IngredientDTO findIngredientByIds(String recipeId, Long ingredientId) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
         if (!recipeOptional.isPresent()) {
             log.error("Recipe with such id isn't present");
@@ -94,7 +94,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public void deleteIngredientByIds(Long recipeId, Long ingredientId) {
+    public void deleteIngredientByIds(String recipeId, Long ingredientId) {
         Optional<Recipe> recipe = recipeRepository.findById(recipeId);
         if (!recipe.isPresent()) {
             log.error("There no such recipe");

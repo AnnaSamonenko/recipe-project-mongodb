@@ -44,7 +44,7 @@ public class IngredientControllerTest {
     public void testListOfIngredients() throws Exception {
         RecipeDTO recipe = new RecipeDTO();
 
-        Mockito.when(recipeService.findRecipeById(Mockito.anyLong())).thenReturn(recipe);
+        Mockito.when(recipeService.findRecipeById(Mockito.anyString())).thenReturn(recipe);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/recipe/1/ingredients"))
                 .andExpect(MockMvcResultMatchers.status().isOk())

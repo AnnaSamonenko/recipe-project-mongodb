@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -19,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class RecipeDTO {
 
-    private Long id;
+    private String id;
 
     @Max(1)
     @Min(999)
