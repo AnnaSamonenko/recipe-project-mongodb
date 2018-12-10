@@ -19,7 +19,6 @@ public class IngredientToIngredientDto implements Converter<Ingredient, Ingredie
         if (ingredient == null)
             return null;
         IngredientDTO ingredientDTO = new IngredientDTO();
-        ingredientDTO.setRecipeId(ingredient.getRecipe().getId());
         ingredientDTO.setId(ingredient.getId());
         ingredientDTO.setDescription(ingredient.getDescription());
         ingredientDTO.setAmount(ingredient.getAmount());

@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Ingredient {
 
-    private String id;
+    private String id = UUID.randomUUID().toString();
 
     private String description;
 
